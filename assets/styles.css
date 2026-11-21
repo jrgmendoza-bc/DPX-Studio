@@ -126,3 +126,8 @@ input{font-family:inherit}
 .pil2row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:28px;padding:28px 0;border-block:1px solid #2a2a2a}
 .pil2{display:flex;align-items:center;gap:18px}
 .pil2-l{flex:0 0 auto;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid #4a4a4a;border-radius:50%;color:#EAE7DF}
+
+.oneline{display:flex;align-items:center;gap:24px}
+.oneline span{flex:1;height:1px;background:#3a3a3a}
+.oneline p{margin:0;font-size:clamp(11px,2.6vw,14px);letter-spacing:.3em;color:#EAE7DF;text-align:center;white-space:nowrap}
+.oneline i{font-style:normal;color:#6f6e69;padding:0 .6em}
