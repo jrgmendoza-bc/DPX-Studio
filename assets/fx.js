@@ -56,6 +56,21 @@
     hero.addEventListener('mouseleave', function () { if (photo) photo.style.transform = ''; });
   }
 
+
+  /* pointer glow on cards */
+  if (fine && !reduce) {
+    var glowCards = document.querySelectorAll('.pil, .svc');
+    for (var gi = 0; gi < glowCards.length; gi++) {
+      (function (card) {
+        card.addEventListener('mousemove', function (e) {
+          var r = card.getBoundingClientRect();
+          card.style.setProperty('--px', (e.clientX - r.left) + 'px');
+          card.style.setProperty('--py', (e.clientY - r.top) + 'px');
+        });
+      })(glowCards[gi]);
+    }
+  }
+
   /* hero: floating dust */
   var cv = $('#dust');
   if (cv && !reduce) {
