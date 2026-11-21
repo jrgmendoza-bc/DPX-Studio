@@ -71,6 +71,8 @@
   }
 
   document.addEventListener('click', function (e) {
+    var ps = closest(e.target, 'data-pick-service');
+    if (ps) { state.service = ps.getAttribute('data-pick-service'); render(); return; }
     var s = closest(e.target, 'data-service');
     if (s) { state.service = s.getAttribute('data-service'); return render(); }
     var d = closest(e.target, 'data-day');
