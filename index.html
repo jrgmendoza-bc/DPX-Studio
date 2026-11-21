@@ -15,13 +15,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 <div style="width:100%;background:#141414;overflow:hidden">
 
 <!-- NAV -->
-<header style="position:relative;z-index:5;max-width:1200px;margin:0 auto;padding:22px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+<div id="topbar" class="topbar">
+<header style="max-width:1200px;margin:0 auto;padding:22px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
 <a href="#top" style="display:flex;align-items:center;gap:14px" aria-label="DPX Hair Studio home">
 <img src="assets/favicon.png" alt="" style="width:40px;height:40px;border-radius:8px">
 <span class="disp" style="font-size:13px;letter-spacing:.18em">DPX Hair Studio</span>
@@ -33,12 +35,18 @@
 <a class="btn btn-light" href="#book" style="padding:12px 22px;border-radius:4px;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase">Book now</a>
 </nav>
 </header>
+<div id="progress" aria-hidden="true"></div>
+</div>
 
 <!-- HERO -->
-<section id="top" style="position:relative;min-height:700px;margin-top:-86px;padding-top:86px;overflow:hidden;border-bottom:1px solid #2a2a2a">
+<section id="top" style="position:relative;min-height:700px;padding-top:86px;overflow:hidden;border-bottom:1px solid #2a2a2a">
 <div aria-hidden="true" style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,#141414 0 54px,#191919 54px 56px)"></div>
 <div aria-hidden="true" class="flow" style="position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(234,231,223,.06) 0 1px,transparent 1px 10px);background-size:100% 180px;-webkit-mask-image:radial-gradient(ellipse at 70% 50%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 70% 50%,#000 0%,transparent 70%)"></div>
 <div aria-hidden="true" class="drift" style="position:absolute;left:30%;top:-10%;width:900px;height:900px;background:radial-gradient(circle,rgba(234,231,223,.13),transparent 62%)"></div>
+<div aria-hidden="true" class="spot"></div>
+<svg aria-hidden="true" class="hexcluster" viewBox="0 0 560 340" fill="none"><polygon class="hexl" style="animation-delay:0.0s" transform="translate(280 170)" points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30"/><polygon class="hexl" style="animation-delay:0.9s" transform="translate(384 170)" points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30"/><polygon class="hexl" style="animation-delay:1.8s" transform="translate(176 170)" points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30"/><polygon class="hexl" style="animation-delay:2.7s" transform="translate(332 260)" points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30"/><polygon class="hexl" style="animation-delay:3.6s" transform="translate(228 260)" points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30"/><polygon class="hexl" style="animation-delay:4.5s" transform="translate(332 80)" points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30"/><polygon class="hexl" style="animation-delay:5.4s" transform="translate(228 80)" points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30"/></svg>
+<canvas id="dust" aria-hidden="true"></canvas>
+
 <div aria-hidden="true" style="position:absolute;left:0;top:0;bottom:0;width:44px;background:repeating-linear-gradient(90deg,#0b0b0b 0 5px,#2b2b2b 5px 8px,#111 8px 14px)"></div>
 <div aria-hidden="true" style="position:absolute;right:0;top:0;bottom:0;width:44px;background:repeating-linear-gradient(90deg,#111 0 6px,#2b2b2b 6px 9px,#0b0b0b 9px 14px)"></div>
 <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:160px;background:linear-gradient(180deg,transparent,#141414)"></div>
@@ -56,8 +64,8 @@
 
 <!-- studio photo -->
 <div style="flex:1 1 360px;min-width:0;display:flex;justify-content:center">
-<figure style="position:relative;margin:0;width:100%;max-width:460px;aspect-ratio:3/4;border-radius:6px;overflow:hidden;border:1px solid #444;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 90px rgba(234,231,223,.08)">
-<img src="assets/studio.jpg" alt="Inside DPX Hair Studio: a black barber chair under hexagon ceiling lights, slatted black walls and a lit mirror." style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+<figure id="photo" class="photo" style="position:relative;margin:0;width:100%;max-width:460px;aspect-ratio:3/4;border-radius:6px;overflow:hidden;border:1px solid #444;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 90px rgba(234,231,223,.08)">
+<img src="assets/studio.jpg" alt="Inside DPX Hair Studio: a black barber chair under hexagon ceiling lights, slatted black walls and a lit mirror." style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" class="kb">
 <div aria-hidden="true" class="sheen" style="position:absolute;top:0;bottom:0;left:0;width:30%;background:linear-gradient(90deg,transparent,rgba(234,231,223,.12),transparent)"></div>
 <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(20,20,20,.75))"></div>
 <figcaption style="position:absolute;left:18px;right:18px;bottom:16px;display:flex;justify-content:space-between;gap:12px;color:#EAE7DF;font-size:12px;letter-spacing:.14em;text-transform:uppercase"><span>The studio</span><span>Megatower 1</span></figcaption>
@@ -74,9 +82,14 @@
 </div>
 </div>
 
+<!-- MARQUEE 2 -->
+<div aria-hidden="true" style="overflow:hidden;border-bottom:1px solid #2a2a2a;background:#111">
+<div class="marq" style="display:flex;width:max-content;animation-direction:reverse;animation-duration:60s"><div class="disp" style="display:flex;white-space:nowrap;padding:16px 0;font-size:12px;letter-spacing:.3em;color:#6f6e69"><span style="padding:0 28px">Fades</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Beard work</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Hot towel</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Razor line</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Baguio City</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Fades</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Beard work</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Hot towel</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Razor line</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Baguio City</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Fades</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Beard work</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Hot towel</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Razor line</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Baguio City</span><span style="padding:0 28px">◆</span></div><div class="disp" style="display:flex;white-space:nowrap;padding:16px 0;font-size:12px;letter-spacing:.3em;color:#6f6e69"><span style="padding:0 28px">Fades</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Beard work</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Hot towel</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Razor line</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Baguio City</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Fades</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Beard work</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Hot towel</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Razor line</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Baguio City</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Fades</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Beard work</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Hot towel</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Razor line</span><span style="padding:0 28px">◆</span><span style="padding:0 28px">Baguio City</span><span style="padding:0 28px">◆</span></div></div>
+</div>
+
 <!-- PILLARS -->
 <section style="max-width:1200px;margin:0 auto;padding:96px 24px 72px;display:flex;flex-direction:column;gap:48px">
-<div style="display:flex;flex-direction:column;gap:14px;max-width:640px">
+<div class="sechead" style="display:flex;flex-direction:column;gap:14px;max-width:640px">
 <span style="color:#A19F98;font-size:13px;letter-spacing:.2em;text-transform:uppercase">The DPX standard</span>
 <h2 class="disp" style="margin:0;font-size:clamp(26px,3.6vw,44px);line-height:1.15;text-wrap:balance">Three words on the wall</h2>
 </div>
@@ -99,11 +112,26 @@
 </div>
 </section>
 
+<!-- GALLERY -->
+<section id="studio" style="max-width:1200px;margin:0 auto;padding:24px 24px 96px;display:flex;flex-direction:column;gap:44px">
+<div class="sechead" style="display:flex;flex-direction:column;gap:14px;max-width:640px">
+<span style="color:#A19F98;font-size:13px;letter-spacing:.2em;text-transform:uppercase">Inside the studio</span>
+<h2 class="disp" style="margin:0;font-size:clamp(26px,3.6vw,44px);line-height:1.15;text-wrap:balance">Black, grey and light</h2>
+<p style="margin:0;color:#A19F98;line-height:1.65;font-size:16px">Slatted walls, hexagon ceiling lights and one chair, set up so nothing gets in the way of the cut.</p>
+</div>
+<div class="galgrid">
+<figure class="gal g-a"><img src="assets/g1.jpg" alt="Hexagon light panels on the studio ceiling" loading="lazy"><figcaption>Hexagon ceiling lights</figcaption></figure>
+<figure class="gal g-b"><img src="assets/g2.jpg" alt="Black barber chair on grey wood flooring" loading="lazy"><figcaption>The chair</figcaption></figure>
+<figure class="gal g-c"><img src="assets/g3.jpg" alt="Lit mirror and station with grooming products" loading="lazy"><figcaption>Station and mirror</figcaption></figure>
+<figure class="gal g-d"><img src="assets/g4.jpg" alt="DPX Hair Studio logo on a screen between window blinds" loading="lazy"><figcaption>Logo wall</figcaption></figure>
+</div>
+</section>
+
 <!-- SERVICES -->
 <section id="services" class="svc-sec">
 <div aria-hidden="true" class="svc-glow drift"></div>
 <div style="position:relative;max-width:1200px;margin:0 auto;padding:48px 24px 96px;display:flex;flex-direction:column;gap:44px">
-<div style="display:flex;flex-direction:column;gap:14px;max-width:640px">
+<div class="sechead" style="display:flex;flex-direction:column;gap:14px;max-width:640px">
 <span style="color:#A19F98;font-size:13px;letter-spacing:.2em;text-transform:uppercase">Services</span>
 <h2 class="disp" style="margin:0;font-size:clamp(26px,3.6vw,44px);line-height:1.15;text-wrap:balance">What we do</h2>
 <p style="margin:0;color:#A19F98;line-height:1.65;font-size:16px">Services and prices are placeholders until the studio sends its menu.</p>
@@ -158,10 +186,19 @@
 </div>
 </section>
 
+<!-- STEPS -->
+<section id="steps" style="max-width:1200px;margin:0 auto;padding:24px 24px 96px;display:flex;flex-direction:column;gap:44px">
+<div class="sechead" style="display:flex;flex-direction:column;gap:14px;max-width:640px">
+<span style="color:#A19F98;font-size:13px;letter-spacing:.2em;text-transform:uppercase">Your visit</span>
+<h2 class="disp" style="margin:0;font-size:clamp(26px,3.6vw,44px);line-height:1.15;text-wrap:balance">From booking to the mirror</h2>
+</div>
+<ol class="steps" style="list-style:none;margin:0;padding:0"><li class="step"><span class="step-n disp">01</span><h3 class="disp" style="margin:0;font-size:16px;letter-spacing:.08em">Book</h3><p style="margin:0;color:#A19F98;line-height:1.6;font-size:15px">Pick a service, a day and a time. It takes under a minute.</p></li><li class="step"><span class="step-n disp">02</span><h3 class="disp" style="margin:0;font-size:16px;letter-spacing:.08em">Walk in</h3><p style="margin:0;color:#A19F98;line-height:1.6;font-size:15px">Megatower 1, Baguio City. The chair is ready when you arrive.</p></li><li class="step"><span class="step-n disp">03</span><h3 class="disp" style="margin:0;font-size:16px;letter-spacing:.08em">Talk it through</h3><p style="margin:0;color:#A19F98;line-height:1.6;font-size:15px">Tell the barber what you want before the first cut.</p></li><li class="step"><span class="step-n disp">04</span><h3 class="disp" style="margin:0;font-size:16px;letter-spacing:.08em">Leave sharp</h3><p style="margin:0;color:#A19F98;line-height:1.6;font-size:15px">Clean lines, a finished style and a quick check in the mirror.</p></li></ol>
+</section>
+
 <!-- BARBERS + BOOKING -->
 <section id="book" style="background:#1a1a1a;border-block:1px solid #2a2a2a">
 <div style="max-width:1200px;margin:0 auto;padding:96px 24px;display:flex;flex-direction:column;gap:56px">
-<div style="display:flex;flex-direction:column;gap:14px;max-width:640px">
+<div class="sechead" style="display:flex;flex-direction:column;gap:14px;max-width:640px">
 <span style="color:#A19F98;font-size:13px;letter-spacing:.2em;text-transform:uppercase">Book a chair</span>
 <h2 class="disp" style="margin:0;font-size:clamp(26px,3.6vw,44px);line-height:1.15;text-wrap:balance">Meet our barber</h2>
 <p style="margin:0;color:#A19F98;line-height:1.65;font-size:16px">Book your chair with the studio&#39;s barber. Name, photo and bio are placeholders.</p>
@@ -188,7 +225,7 @@
 </div>
 
 <!-- right: schedule + details -->
-<div style="flex:1 1 360px;min-width:0;padding:32px;border:1px solid #3a3a3a;border-radius:6px;background:#141414;display:flex;flex-direction:column;gap:28px">
+<div class="glowbox" style="flex:1 1 360px;min-width:0;padding:32px;border:1px solid #3a3a3a;border-radius:6px;background:#141414;display:flex;flex-direction:column;gap:28px">
 <div id="form-pane">
 <div style="display:flex;flex-direction:column;gap:28px">
 <div style="display:flex;flex-direction:column;gap:14px">
@@ -278,5 +315,6 @@
 
 </div>
 <script src="assets/app.js"></script>
+<script src="assets/fx.js"></script>
 </body>
 </html>
