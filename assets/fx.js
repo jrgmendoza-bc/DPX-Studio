@@ -59,7 +59,7 @@
 
   /* pointer glow on cards */
   if (fine && !reduce) {
-    var glowCards = document.querySelectorAll('.pil, .svc');
+    var glowCards = document.querySelectorAll('.svc');
     for (var gi = 0; gi < glowCards.length; gi++) {
       (function (card) {
         card.addEventListener('mousemove', function (e) {
