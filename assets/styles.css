@@ -131,3 +131,10 @@ input{font-family:inherit}
 .oneline span{flex:1;height:1px;background:#3a3a3a}
 .oneline p{margin:0;font-size:clamp(11px,2.6vw,14px);letter-spacing:.3em;color:#EAE7DF;text-align:center;white-space:nowrap}
 .oneline i{font-style:normal;color:#6f6e69;padding:0 .6em}
+@media (max-width:760px){
+  .steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+  .step{padding-top:16px;gap:8px}
+  .step p{display:none}
+  .step-n{font-size:26px}
+  .step h3{font-size:11px!important;letter-spacing:.04em!important;line-height:1.3}
+}
