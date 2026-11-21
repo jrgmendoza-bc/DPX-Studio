@@ -5,12 +5,6 @@
   var ON = 'background:' + ACCENT + ';color:#141414;border:1px solid ' + ACCENT;
   var OFF = 'background:#1d1d1d;color:#EAE7DF;border:1px solid #3a3a3a';
 
-  var BARBERS = [
-    { id: 'any', name: 'First available', role: 'Any barber, soonest chair', initials: 'DPX' },
-    { id: 'b1', name: 'Barber One', role: '[Role / specialty]', initials: 'B1' },
-    { id: 'b2', name: 'Barber Two', role: '[Role / specialty]', initials: 'B2' },
-    { id: 'b3', name: 'Barber Three', role: '[Role / specialty]', initials: 'B3' }
-  ];
   var SERVICES = [
     { id: 'cut', label: 'Haircut' },
     { id: 'beard', label: 'Beard trim' },
@@ -21,7 +15,7 @@
   var TIMES = ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM', '7:00 PM'];
   var DOWS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-  var state = { barber: 'any', service: 'cut', day: 0, time: '', name: '', phone: '' };
+  var state = { service: 'cut', day: 0, time: '', name: '', phone: '' };
 
   var now = new Date();
   var DAYS = [];
@@ -31,7 +25,7 @@
   }
 
   var el = function (id) { return document.getElementById(id); };
-  var barbersEl = el('barbers'), chipsEl = el('service-chips'), daysEl = el('days'), slotsEl = el('slots');
+  var chipsEl = el('service-chips'), daysEl = el('days'), slotsEl = el('slots');
   var submit = el('submit'), formPane = el('form-pane'), donePane = el('done-pane');
   var nameInput = el('f-name'), phoneInput = el('f-phone');
   var summaries = document.querySelectorAll('.summary');
@@ -39,14 +33,6 @@
   function isTaken(dayIdx, slotIdx) { return (dayIdx * 7 + slotIdx * 3) % 5 === 0; }
 
   function render() {
-    barbersEl.innerHTML = BARBERS.map(function (b) {
-      var sel = state.barber === b.id;
-      return '<button type="button" class="card" data-barber="' + b.id + '" aria-pressed="' + sel + '" style="flex:1 1 200px;min-width:0;max-width:260px;display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:6px;text-align:left;font-size:16px;' + (sel ? ON : OFF) + '">' +
-        '<div aria-hidden="true" style="height:96px;border-radius:4px;background:repeating-linear-gradient(90deg,#222 0 10px,#2c2c2c 10px 12px,#1a1a1a 12px 22px);display:flex;align-items:center;justify-content:center;border:1px solid #3a3a3a"><span class="disp" style="font-size:22px;color:#EAE7DF">' + b.initials + '</span></div>' +
-        '<span class="disp" style="font-size:14px;letter-spacing:.08em;text-align:left">' + b.name + '</span>' +
-        '<span style="font-size:14px;opacity:.75;text-align:left">' + b.role + '</span></button>';
-    }).join('');
-
     chipsEl.innerHTML = SERVICES.map(function (s) {
       var sel = state.service === s.id;
       return '<button type="button" class="chip btn" data-service="' + s.id + '" aria-pressed="' + sel + '" style="padding:14px 20px;border-radius:4px;font-size:15px;font-weight:600;' + (sel ? ON : OFF) + '">' + s.label + '</button>';
@@ -64,10 +50,9 @@
       return '<button type="button" class="chip btn" data-time="' + t + '"' + (taken ? ' disabled' : '') + ' aria-pressed="' + sel + '" style="padding:11px 14px;border-radius:4px;font-size:14px;font-variant-numeric:tabular-nums;' + style + '">' + t + '</button>';
     }).join('');
 
-    var barber = BARBERS.filter(function (b) { return b.id === state.barber; })[0];
     var service = SERVICES.filter(function (s) { return s.id === state.service; })[0];
     var when = state.time ? DAYS[state.day].label + ', ' + state.time : 'pick a time';
-    var text = service.label + ' with ' + barber.name + ' · ' + when;
+    var text = service.label + ' · ' + when;
     for (var k = 0; k < summaries.length; k++) summaries[k].textContent = text;
 
     var ready = !!(state.time && state.name.trim() && state.phone.trim());
@@ -86,8 +71,6 @@
   }
 
   document.addEventListener('click', function (e) {
-    var b = closest(e.target, 'data-barber');
-    if (b) { state.barber = b.getAttribute('data-barber'); return render(); }
     var s = closest(e.target, 'data-service');
     if (s) { state.service = s.getAttribute('data-service'); return render(); }
     var d = closest(e.target, 'data-day');

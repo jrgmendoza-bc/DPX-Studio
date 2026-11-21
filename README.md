@@ -22,7 +22,7 @@ python3 -m http.server 8000
 ## Placeholders to replace
 
 - Service prices and durations
-- Barber names, roles and photos
+- Barber name, role, bio and photo
 - Opening hours and mobile number
 - Time-slot availability (sample data in `assets/app.js`)
 
