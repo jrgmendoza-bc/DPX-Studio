@@ -17,7 +17,7 @@
   onScroll();
 
   /* reveal on scroll */
-  var groups = ['.sechead', '.pillar', '.svc', '.gal', '.step', '#book .card', '#book .glowbox', '#visit > div'];
+  var groups = ['.sechead', '.pillar', '.svc', '.gal', '.pol', '.tmcar', '.step', '#book .card', '#book .glowbox', '#visit > div'];
   var items = [];
   groups.forEach(function (sel) {
     var list = document.querySelectorAll(sel);
@@ -69,6 +69,41 @@
         });
       })(glowCards[gi]);
     }
+  }
+
+
+  /* testimonials carousel */
+  var car = $('#tmcar');
+  if (car) {
+    var track = car.querySelector('.tm-track'), dotEls = car.querySelectorAll('.tm-dot'), cur = 0, timer = null, paused = false;
+    var count = dotEls.length;
+    function setDot(i) {
+      cur = i;
+      for (var d = 0; d < dotEls.length; d++) {
+        if (d === i) dotEls[d].setAttribute('aria-current', 'true'); else dotEls[d].removeAttribute('aria-current');
+      }
+    }
+    function go(i) {
+      i = (i + count) % count;
+      track.scrollTo({ left: i * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+      setDot(i);
+    }
+    var st = null;
+    track.addEventListener('scroll', function () {
+      clearTimeout(st);
+      st = setTimeout(function () { setDot(Math.round(track.scrollLeft / track.clientWidth)); }, 80);
+    }, { passive: true });
+    car.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('button') : null;
+      if (!b) return;
+      if (b.hasAttribute('data-dir')) go(cur + parseInt(b.getAttribute('data-dir'), 10));
+      else if (b.hasAttribute('data-i')) go(parseInt(b.getAttribute('data-i'), 10));
+    });
+    function start() { if (reduce || timer) return; timer = setInterval(function () { if (!paused && !document.hidden) go(cur + 1); }, 7000); }
+    ['mouseenter', 'focusin', 'touchstart'].forEach(function (ev) { car.addEventListener(ev, function () { paused = true; }, { passive: true }); });
+    ['mouseleave', 'focusout', 'touchend'].forEach(function (ev) { car.addEventListener(ev, function () { paused = false; }, { passive: true }); });
+    window.addEventListener('resize', function () { track.scrollLeft = cur * track.clientWidth; });
+    start();
   }
 
   /* hero: floating dust */
